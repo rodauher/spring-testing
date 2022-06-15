@@ -1,0 +1,7 @@
+version: "3.0"
+services: 
+  springrest:
+    image: spring:latest
+    build: .
+    ports:
+      - "8080:8080" 
