@@ -24,12 +24,6 @@ public class HttpRequestTest {
     TestRestTemplate restTemplate;
 
     @Test
-    public void greetingShouldReturnDefaultMessage() {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/", String.class))
-                .contains("Hola ke ase");
-    }
-
-    @Test
     public void canAdd() {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/add?a=1&b=2", String.class))
                 .isEqualTo("3.0");
