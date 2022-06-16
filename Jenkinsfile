@@ -12,7 +12,7 @@ pipeline {
                 //git branch: 'main', url: 'https://github.com/rodauher/Hello-Springboot.git'
                 //sh "./gradlew test assemble"
                 withGradle {
-                sh "./gradlew test assemble"
+                sh "./gradlew test assemble check"
                 jacoco execPattern: 'build/jacoco/*.exec'
                 }
             }
