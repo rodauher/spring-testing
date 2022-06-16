@@ -13,6 +13,7 @@ pipeline {
                 //sh "./gradlew test assemble"
                 withGradle {
                 sh "./gradlew test assemble"
+                jacoco execPattern: 'build/jacoco/*.exec'
                 }
             }
             post {
