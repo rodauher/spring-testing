@@ -14,6 +14,7 @@ pipeline {
                 withGradle {
                 sh "./gradlew test assemble check"
                 jacoco execPattern: 'build/jacoco/*.exec'
+                recordIssues(tools: [pmdParser(pattern: 'build/reports/pmd/*.xml')])
                 }
             }
             post {
