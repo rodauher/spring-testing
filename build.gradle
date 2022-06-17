@@ -41,9 +41,10 @@ pmd {
 }
 pitest {
 	junit5PluginVersion = '0.15'
-	targetClasses = ['com.example.springtesting.*'] //by default "${project.group}.*"
-	pitestVersion = '1.7.4'//not needed when a default PIT version should be used
+	targetClasses = ['com.example.springtesting.*']
+	pitestVersion = '1.7.4'
 	threads = 4
 	outputFormats = ['XML', 'HTML']
 	timestampedReports = false
+
 }

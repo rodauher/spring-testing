@@ -104,5 +104,11 @@ public class HttpRequestTest {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/divide?a=1&b=2", String.class))
                 .isEqualTo("0.5");
     }
+    @Test
+    public void ResponseGreting() {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/greeting", String.class))
+                .isEqualTo("Hello, Hello");
+
+    }
 
 }
