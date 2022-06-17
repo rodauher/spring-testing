@@ -5,6 +5,7 @@ plugins {
 	id 'com.adarshr.test-logger' version '3.2.0'
 	id 'jacoco'
 	id 'pmd'
+	id 'info.solidsoft.pitest' version '1.7.4'
 }
 
 group = 'com.example'
@@ -31,9 +32,6 @@ jacocoTestReport {
 		xml.required = true
 	}
 }
-
-
-
 pmd {
 	consoleOutput = true
 	ignoreFailures = true
@@ -41,4 +39,11 @@ pmd {
 	rulesMinimumPriority = 5
 	ruleSets = ["category/java/errorprone.xml", "category/java/bestpractices.xml"]
 }
-
+pitest {
+	junit5PluginVersion = '0.15'
+	targetClasses = ['com.example.springtesting.*'] //by default "${project.group}.*"
+	pitestVersion = '1.7.4'//not needed when a default PIT version should be used
+	threads = 4
+	outputFormats = ['XML', 'HTML']
+	timestampedReports = false
+}
