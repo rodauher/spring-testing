@@ -29,7 +29,7 @@ pipeline {
         stage('Publish'){
             steps {
             withGradle {
-                wthCredentials([usernamePassword(credentialsId: 'DockerGHCR', passwordVariable: 'TOKEN', usernameVariable: 'USERNAME')]){
+                withCredentials([usernamePassword(credentialsId: 'DockerGHCR', passwordVariable: 'TOKEN', usernameVariable: 'USERNAME')]){
                 sh "./gradlew publish"}
                 }
                 sshagent(['github-ssh']) {
