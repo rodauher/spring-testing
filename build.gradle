@@ -16,23 +16,20 @@ sourceCompatibility = '11'
 repositories {
 	mavenCentral()
 }
-subprojects {
-	apply plugin: "maven-publish"
-	publishing {
-		repositories {
-			maven {
-				name = "spring-testing"
-				url = uri("https://maven.pkg.github.com/rodauher/spring-testing")
-				credentials {
-					username = project.findProperty("gpr.user") ?: System.getenv("rodauher")
-					password = project.findProperty("gpr.key") ?: System.getenv("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")
-				}
+publishing {
+	repositories {
+		maven {
+			name = "spring-testing"
+			url = uri("https://maven.pkg.github.com/rodauher/spring-testing")
+			credentials {
+				username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+				password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
 			}
 		}
-		publications {
-			gpr(MavenPublication) {
-				from(components.java)
-			}
+	}
+	publications {
+		gpr(MavenPublication) {
+			from(components.java)
 		}
 	}
 }
