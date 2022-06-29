@@ -17,7 +17,12 @@ repositories {
 	mavenCentral()
 }
 publishing {
-	apply plugin: "maven-publish"
+	publications {
+		mavenJava(MavenPublication){
+			// bootJar is the default build task configured by Spring Boot
+			artifact bootJar
+		}
+	}
 	repositories {
 		maven {
 			name = "spring-testing"
