@@ -16,8 +16,6 @@ sourceCompatibility = '11'
 repositories {
 	mavenCentral()
 }
-subprojects {
-	apply plugin: "maven-publish"
 	publishing {
 		publications {
 			mavenJava(MavenPublication) {
@@ -33,15 +31,11 @@ subprojects {
 					username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
 					password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
 				}
-			}
+
 		}
-		publications {
-			gpr(MavenPublication) {
-				from(components.java)
-			}
 		}
 	}
-}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
