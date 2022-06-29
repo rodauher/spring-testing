@@ -6,6 +6,7 @@ plugins {
 	id 'jacoco'
 	id 'pmd'
 	id 'info.solidsoft.pitest' version '1.7.4'
+	id("maven-publish")
 }
 
 group = 'com.example'
@@ -15,7 +16,26 @@ sourceCompatibility = '11'
 repositories {
 	mavenCentral()
 }
-
+subprojects {
+	apply plugin: "maven-publish"
+	publishing {
+		repositories {
+			maven {
+				name = "spring-testing"
+				url = uri("https://maven.pkg.github.com/rodauher/spring-testing")
+				credentials {
+					username = project.findProperty("gpr.user") ?: System.getenv("rodauher")
+					password = project.findProperty("gpr.key") ?: System.getenv("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")
+				}
+			}
+		}
+		publications {
+			gpr(MavenPublication) {
+				from(components.java)
+			}
+		}
+	}
+}
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
