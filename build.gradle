@@ -18,18 +18,9 @@ repositories {
 }
 publishing {
 	publications {
-		mavenJava(MavenPublication) {
-			from components.java
-
-			versionMapping {
-				usage('java-api') {
-					fromResolutionOf('runtimeClasspath')
-				}
-				usage('java-runtime') {
-					fromResolutionResult()
-				}
-			}
-		}
+		mavenJava(MavenPublication){
+			// bootJar is the default build task configured by Spring Boot
+			artifact bootJar
 		}
 	}
 	repositories {
