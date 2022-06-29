@@ -12,7 +12,7 @@ pipeline {
                 //git branch: 'main', url: 'https://github.com/rodauher/Hello-Springboot.git'
                 //sh "./gradlew test assemble"
                 withGradle {
-                withCredentials([usernamePassword(credentialsId: 'DockerGHCR', passwordVariable: 'TOKEN', usernameVariable: 'USER')]){
+                withCredentials([usernamePassword(credentialsId: 'DockerGHCR', passwordVariable: 'TOKEN', usernameVariable: 'USERNAME')]){
                 sh "./gradlew test assemble check pitest publish"
                 jacoco execPattern: 'build/jacoco/*.exec'
                 recordIssues(tools: [pmdParser(pattern: 'build/reports/pmd/*.xml')])
