@@ -16,26 +16,29 @@ sourceCompatibility = '11'
 repositories {
 	mavenCentral()
 }
-publishing {
-	publications {
-		mavenJava(MavenPublication){
-			// bootJar is the default build task configured by Spring Boot
-			artifact bootJar
-		}
-	}
-	repositories {
-		maven {
-			name = "spring-testing"
-			url = uri("https://maven.pkg.github.com/rodauher/spring-testing")
-			credentials {
-				username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-				password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+subprojects {
+	apply plugin: "maven-publish"
+	publishing {
+		publications {
+			mavenJava(MavenPublication) {
+				// bootJar is the default build task configured by Spring Boot
+				artifact bootJar
 			}
 		}
-	}
-	publications {
-		gpr(MavenPublication) {
-			from(components.java)
+		repositories {
+			maven {
+				name = "spring-testing"
+				url = uri("https://maven.pkg.github.com/rodauher/spring-testing")
+				credentials {
+					username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+					password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+				}
+			}
+		}
+		publications {
+			gpr(MavenPublication) {
+				from(components.java)
+			}
 		}
 	}
 }
