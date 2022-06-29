@@ -12,13 +12,12 @@ pipeline {
                 //git branch: 'main', url: 'https://github.com/rodauher/Hello-Springboot.git'
                 //sh "./gradlew test assemble"
                 withGradle {
-                withCredentials([usernamePassword(credentialsId: 'DockerGHCR', passwordVariable: 'TOKEN', usernameVariable: 'USERNAME')]){
-                sh "./gradlew test assemble check pitest publish"
+                sh "./gradlew test assemble check pitest"
                 jacoco execPattern: 'build/jacoco/*.exec'
                 recordIssues(tools: [pmdParser(pattern: 'build/reports/pmd/*.xml')])
                 recordIssues(tools: [pit(pattern: 'build/reports/pitest/*.xml')])
                 }
-            }
+
             }
             post {
                 success {
@@ -31,8 +30,8 @@ pipeline {
             steps {
             withGradle {
                 wthCredentials([usernamePassword(credentialsId: 'DockerGHCR', passwordVariable: 'TOKEN', usernameVariable: 'USERNAME')]){
-                sh "./gradlew publish"
-                            }}
+                sh "./gradlew publish"}
+                }
                 sshagent(['github-ssh']) {
                 sh 'git tag BUILD-1.0.${BUILD_NUMBER}'
                 sh 'git push --tags'
