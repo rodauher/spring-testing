@@ -17,6 +17,7 @@ repositories {
 	mavenCentral()
 }
 publishing {
+	apply plugin: "maven-publish"
 	repositories {
 		maven {
 			name = "spring-testing"
